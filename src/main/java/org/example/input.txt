@@ -1,0 +1,1 @@
+Hello, my name is Lucas, I'm 24 years old and currently a student of Software Engeneering. This assignment requires to create this input file in order to count how many words are unique, so I wil try to put at least one repeated word. Hope it all goes well. Input file created.

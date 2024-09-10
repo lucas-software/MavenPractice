@@ -3,8 +3,14 @@ import org.example.Exceptions.*;
 import org.example.Leagues.*;
 import org.example.Teams.*;
 import org.example.Staffers.*;
-
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -82,6 +88,22 @@ public class Main {
                 System.out.println("Error removing staffer: " + e.getMessage());
             }
 
+        }
+
+        try{
+            File inputFile = new File("input.txt");
+            File outputFile = new File("output.txt");
+
+            String content = FileUtils.readFileToString(inputFile);
+            if (!inputFile.exists()) {
+                System.out.println("O arquivo input.txt não foi encontrado!");
+            }
+
+            Set<String> uniqueWords = new HashSet<>(Arrays.asList(StringUtils.split(content.toLowerCase(), " \t\n\r\f,.:;?![]'\"")));
+
+            FileUtils.writeStringToFile(outputFile, "Unique word count: " + uniqueWords.size());
+        }catch (IOException e){
+            System.out.println("Read error.");
         }
     }
 }
