@@ -7,10 +7,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.example.Leagues.LambdaFunctions.findLeagueWithHighestId;
+import static org.example.Staffers.LambdaFunctions.filterStaffByType;
+import static org.example.Teams.LambdaFunctions.mapTeamNames;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,7 +33,7 @@ public class Main {
         ArrayList<Staff> staffers = new ArrayList<>();
         Coach headCoach = new Coach(1, "Bill Belichick", 72);
         staffers.add(headCoach);
-        StaffMoves StaffMoves = new StaffMoves();
+        StaffMoves staffMoves = new StaffMoves(); //correct
         StaffMoves.hireStaff();
         Coordinator coordinator = new Coordinator(2, "Defensive coordinator", "Jerod Mayo", 38);
         staffers.add(coordinator);
@@ -46,10 +48,19 @@ public class Main {
         Staff staffer2 = new Coach(2, "Mike Vrabel", 51);
         staffers.add(staffer2);
         StaffMoves.hireStaff();
+        //Lambda Functions
+        Optional<League> largestLeague = findLeagueWithHighestId(leagues);
+
+        List<String> teamNames = mapTeamNames(teams);
+        teamNames.forEach(System.out::println);
+
+        List<Coach> coaches = filterStaffByType(staffers, Coach.class);
+        coaches.forEach(System.out::println);
+        //
         //methods toString,hashCode and equals
         System.out.println(staffer2.toString());
         System.out.println(staffer.hashCode());
-        System.out.println(staffer2.equals(staffer));
+        System.out.println(staffer2.equals(staffer));//implement the method in Staffer class
         headCoach.submitReport();
         headCoach.attendTraining();
         headCoach.takeBreak();
@@ -64,10 +75,45 @@ public class Main {
         intern.displayInternshipDuration();
         intern.takeBreak();
 
+        //Collection and Streaming
+        teamNames = teams.stream()
+                .map(Team::getName)
+                .collect(Collectors.toList());
+        System.out.println("Nomes dos times: " + teamNames);
+
+        System.out.println("Jogadores ordenados por ID:");
+        players.stream()
+                .sorted(Comparator.comparingInt(Player::getNumber))
+                .forEach(System.out::println);
+
+        Optional<Team> firstNorthConferenceTeam = teams.stream()
+                .filter(team -> team.getConference() == Conference.NORTH)
+                .findFirst();
+        firstNorthConferenceTeam.ifPresent(team -> System.out.println("Primeiro time do Norte: " + team.getName()));
+
+        List<Team> southConferenceTeams = teams.stream()
+                .filter(team -> team.getConference() == Conference.SOUTH)
+                .collect(Collectors.toList());
+        System.out.println("Times do Conference SOUTH: " + southConferenceTeams);
+
+        Set<String> uniquePlayerCountries = players.stream()
+                .map(Player::getNationality)
+                .distinct()
+                .collect(Collectors.toSet());
+        System.out.println("Países únicos dos jogadores: " + uniquePlayerCountries);
+
+        Map<Class<? extends Staff>, List<Staff>> staffGroupedByType = staffers.stream()
+                .collect(Collectors.groupingBy(Staff::getClass));
+        staffGroupedByType.forEach((type, list) -> {
+            System.out.println("Tipo de Staff: " + type.getSimpleName());
+            list.forEach(System.out::println);
+        });
+        //
+
         //Try-catch use
         try {
             for (Staff i : staffers) {
-                if (coordinator.getId() == 19191) {
+                if (i.getId() == 19191) {
                     System.out.println("Exists");
                 } else {
                     throw new StaffNotFoundException("Id not found");
@@ -91,8 +137,8 @@ public class Main {
         }
 
         try{
-            File inputFile = new File("input.txt");
-            File outputFile = new File("output.txt");
+            File inputFile = new File("C:\\Users\\lucas\\IdeaProjects\\PracticeMaven\\src\\main\\java\\org\\example\\input.txt");
+            File outputFile = new File("C:\\Users\\lucas\\IdeaProjects\\PracticeMaven\\src\\main\\java\\org\\example\\output.txt");
 
             String content = FileUtils.readFileToString(inputFile);
             if (!inputFile.exists()) {
