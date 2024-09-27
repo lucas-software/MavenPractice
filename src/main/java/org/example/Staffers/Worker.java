@@ -32,13 +32,14 @@ public class Worker extends Staff{
     }
 
     @Override
-    void work() {
-
+    public void work() {
+        System.out.println("Worker is working on technical tasks.");
     }
 
     @Override
-    void takeBreak() {
-
+    public void takeBreak() {
+        System.out.println("Worker is taking a break.");
     }
+
 }
 

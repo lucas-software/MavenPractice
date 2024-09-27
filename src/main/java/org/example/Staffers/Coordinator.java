@@ -33,10 +33,10 @@ public class Coordinator extends Staff{
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age){
         this.age = age;
     }
-
+//work on throws
     @Override
     public String toString() {
         return "Coordinator[Name: " + name + ",\n" + "Role: " + role + ",\n" +"Age: " + age + ",\n" + "Id: " +getId();
@@ -54,12 +54,13 @@ public class Coordinator extends Staff{
     }
 
     @Override
-    void work() {
-
+    public void work() {
+        System.out.println("Coordinator is working on technical tasks.");
     }
 
     @Override
-    void takeBreak() {
-
+    public void takeBreak() {
+        System.out.println("Coordinator is taking a break.");
     }
+
 }
