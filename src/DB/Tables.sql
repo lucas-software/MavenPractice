@@ -1,10 +1,55 @@
-INSERT INTO coach (id,name,age) VALUES (01,'Lucas Ribeiro', 21);
-INSERT INTO coodinator (id,role,name,age) VALUES (02,'Lucas Ribeiro','Beetlehuice', 22);
-INSERT INTO intern (id,internshipDuration) VALUES (03,18);
-INSERT INTO nba (id,numberOfTeams,sport) VALUES (81,32,'Basketball');
-INSERT INTO nfl (id,numberOfTeams,sport) VALUES (82,32,'Football');
-INSERT INTO nbateam (id,name) VALUES (91,'San Francisco Calonje');
-INSERT INTO nflteam (id,name) VALUES (01,'San Lucas Ribeiro');
-INSERT INTO player (number, nationality, position) VALUES (11,'Brazillian','Winger');
+CREATE DATABASE sportDB;
+DROP DATABASE sportDB;
 
+CREATE TABLE Coach(
+    id int(3),
+    age int(3),
+    name varchar(40)
+);
 
+CREATE TABLE Coordinator(
+    id int(3),
+    age int(3),
+    name varchar(40),
+    role varchar(15)
+);
+
+CREATE TABLE Intern(
+    id int(3),
+    internshipDuration int(2)
+);
+
+CREATE TABLE Worker(
+    id int(2),
+    role varchar(15)
+);
+
+CREATE TABLE NbaTeam(
+    name varchar(25),
+    conference varchar(3),
+    id int(2)
+);
+
+CREATE TABLE NflTeam(
+    name varchar(25),
+    conference varchar(3),
+    id int(2)
+);
+
+CREATE TABLE Player(
+    number int(2),
+    nationality varchar(15),
+    position varchar(10)
+);
+
+CREATE TABLE Nba(
+    id int(2),
+    sport varchar(15),
+    numberOfTeams int(2)
+);
+
+CREATE TABLE Nba(
+    id int(2),
+    sport varchar(15),
+    numberOfTeams int(2)
+);
