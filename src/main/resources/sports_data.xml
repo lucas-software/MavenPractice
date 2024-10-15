@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SportsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sports_schema.xsd">
+    <League>
+        <league_id>1</league_id>
+        <Nba>
+            <nba_id>101</nba_id>
+            <sport>Basketball</sport>
+            <numberOfTeams>30</numberOfTeams>
+            <Team>
+                <team_id>501</team_id>
+                <name>Lakers</name>
+                <conference>West</conference>
+                <Coach>
+                    <coach_id>301</coach_id>
+                    <name>John Doe</name>
+                    <age>45</age>
+                    <Staff>
+                        <staff_id>201</staff_id>
+                    </Staff>
+                </Coach>
+            </Team>
+        </Nba>
+    </League>
+</SportsData>

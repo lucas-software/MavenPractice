@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="SportsData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="League" type="LeagueType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="LeagueType">
+        <xs:sequence>
+            <xs:element name="league_id" type="xs:int"/>
+            <xs:element name="Nba" type="NbaType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NbaType">
+        <xs:sequence>
+            <xs:element name="nba_id" type="xs:int"/>
+            <xs:element name="sport" type="xs:string"/>
+            <xs:element name="numberOfTeams" type="xs:int"/>
+            <xs:element name="Team" type="TeamType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TeamType">
+        <xs:sequence>
+            <xs:element name="team_id" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="conference" type="xs:string"/>
+            <xs:element name="Coach" type="CoachType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CoachType">
+        <xs:sequence>
+            <xs:element name="coach_id" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="age" type="xs:int"/>
+            <xs:element name="Staff" type="StaffType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StaffType">
+        <xs:sequence>
+            <xs:element name="staff_id" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
