@@ -1,0 +1,21 @@
+{
+  "league_id": 1,
+  "nba": {
+    "nba_id": 101,
+    "sport": "Basketball",
+    "numberOfTeams": 30,
+    "team": {
+      "team_id": 501,
+      "name": "Lakers",
+      "conference": "West",
+      "coach": {
+        "coach_id": 301,
+        "name": "John Doe",
+        "age": 45,
+        "staff": {
+          "staff_id": 201
+        }
+      }
+    }
+  }
+}

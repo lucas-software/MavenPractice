@@ -1,8 +1,17 @@
 package org.example.Teams;
 
-public class Team {
+import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Team {
+    @XmlElement
+    @JsonProperty("name")
     private String name;
+    @XmlElement
+    @JsonProperty("conference")
     private Conference conference;
 
     public Team(String name, Conference conference) {

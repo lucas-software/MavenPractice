@@ -1,4 +1,5 @@
 package org.example;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Exceptions.*;
 import org.example.Leagues.*;
 import org.example.Teams.*;
@@ -17,6 +18,8 @@ import java.lang.reflect.Modifier;
 import static org.example.Leagues.LambdaFunctions.findLeagueWithHighestId;
 import static org.example.Staffers.LambdaFunctions.filterStaffByType;
 import static org.example.Teams.LambdaFunctions.mapTeamNames;
+
+import javax.xml.bind.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -202,6 +205,33 @@ public class Main {
             method.invoke(myObject);
         }catch(Exception e){
             System.out.println("Error");
+        }
+
+        try {
+            JAXBContext context = JAXBContext.newInstance(League.class);
+
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            League league = (League) unmarshaller.unmarshal(new File("sports_data.xml"));
+            System.out.println("League ID: " + league.getId());
+
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(league, new File("output.xml"));
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            League league = mapper.readValue(new File("sports_data.json"), League.class);
+            System.out.println("League ID: " + league.getId());
+
+            mapper.writeValue(new File("output_sports.json"), league);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

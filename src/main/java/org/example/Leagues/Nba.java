@@ -1,8 +1,15 @@
 package org.example.Leagues;
 
-public class Nba extends League{
+import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@XmlRootElement
+public class Nba extends League{
+    @XmlElement
+    @JsonProperty("sport")
     private String sport;
+    @XmlElement
+    @JsonProperty("numberOfTeams")
     private int numberOfTeams;
 
     public Nba(int id,String sport,int numberOfTeams) {
